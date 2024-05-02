@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %} {{ patient_history.patient_id.name }} {% endblock title %}
+
+{% block content %}
+
+    <h2>{{ patient_history.patient_id.name }}</h2>
+    <p>Date of Treatment: {{ patient_history.date_of_treatment }}</p>
+    <p>Age: {{ patient_history.age }}</p>
+    <p>Condition: {{ patient_history.condition }}</p>
+    <p>Symptoms: {{ patient_history.symptoms }}</p>
+    <p>Diagnosis: {{ patient_history.diagnosis }}</p>
+    <p>Treatment: {{ patient_history.treatment }}</p>
+    <p>Medications: {{ patient_history.medications }}</p>
+    <p>Attending Physician: {{ patient_history.attending_physician }}</p>
+    <p>Notes: {{ patient_history.notes }}</p>
+    
+    <br>
+    <p><a href="{% url 'edit_medical_history' patient_history.id %}">Edit</a></p>
+
+{% endblock content %}

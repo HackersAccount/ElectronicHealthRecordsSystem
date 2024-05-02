@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}List of Patients{% endblock title %}
+
+{% block content %}
+    {% for patient in patients %}
+        <p><a href={% url "medical_history" patient.id %}>{{ patient.name }}</a></p>
+    {% endfor %}
+
+    <br>
+    <h2><a href="{% url 'create-patient' %}">Create Patient</a></h2>
+{% endblock content %}
