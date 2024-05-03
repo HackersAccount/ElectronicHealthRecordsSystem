@@ -3,10 +3,28 @@
 {% block title %}List of Patients{% endblock title %}
 
 {% block content %}
-    {% for patient in patients %}
-        <p><a href={% url "medical_history" patient.id %}>{{ patient.name }}</a></p>
-    {% endfor %}
+<div class="container">
+    
+        <h2><a class="btn btn-success" href="{% url 'create-patient' %}">Create Patient</a></h2>
+        <table class="table table-sm table-bordered table-striped table-hover">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Medical History</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for patient in patients %}
+            <tr>
+                    <td>{{ patient.name }}</td>
+                    <td>{{ patient.email }}</td>
+                    <td><a href={% url "medical_history" patient.id %}>View Medical History</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
     <br>
-    <h2><a href="{% url 'create-patient' %}">Create Patient</a></h2>
 {% endblock content %}
