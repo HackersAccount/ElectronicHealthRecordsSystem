@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     
     
     # Local
-    'accounts.apps.AccountsConfig',
+    # 'accounts.apps.AccountsConfig',
     'patients.apps.PatientsConfig',
     'medical_history.apps.MedicalHistoryConfig',
     
@@ -143,7 +143,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = 'accounts.CustomUser'
+# AUTH_USER_MODEL = 'accounts.CustomUser'
 
 # django crispy forms
 CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
