@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Your Dashboard</title>
+    <!-- Material-UI CSS -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/material-components-web@11.0.0/dist/material-components-web.min.css"
+    />
+    <!-- Your custom CSS styles -->
+    <style>
+      .mdc-top-app-bar--fixed-adjust {
+        margin-left: 24px; /* Set the width of the sidebar */
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Sidebar -->
+    <aside class="mdc-drawer mdc-drawer--dismissible">
+      <div class="mdc-drawer__content">
+        <nav class="mdc-list">
+          <a class="mdc-list-item" href="{% url 'patients_page' %}">
+            <span class="mdc-list-item__graphic material-icons">people</span>
+            <span class="mdc-list-item__text">Patients</span>
+          </a>
+          <a class="mdc-list-item" href="{% url 'medication_page' %}">
+            <span class="mdc-list-item__graphic material-icons"
+              >medical_services</span
+            >
+            <span class="mdc-list-item__text">Medication</span>
+          </a>
+          <a class="mdc-list-item" href="{% url 'diagnosis_page' %}">
+            <span class="mdc-list-item__graphic material-icons"
+              >description</span
+            >
+            <span class="mdc-list-item__text">Diagnosis</span>
+          </a>
+        </nav>
+      </div>
+    </aside>
+
+    <!-- Main content -->
+    <div class="mdc-drawer-app-content">
+      <!-- Top app bar -->
+      <header class="mdc-top-app-bar">
+        <div class="mdc-top-app-bar__row">
+          <div
+            class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start"
+          >
+            <button
+              class="mdc-icon-button material-icons mdc-top-app-bar__navigation-icon"
+            >
+              menu
+            </button>
+            <span class="mdc-top-app-bar__title">Your Dashboard</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- Page content -->
+      <main class="mdc-top-app-bar--fixed-adjust">
+        {% block content %} {% endblock %}
+      </main>
+    </div>
+
+    <!-- Material-UI JS -->
+    <script src="https://cdn.jsdelivr.net/npm/material-components-web@11.0.0/dist/material-components-web.min.js"></script>
+    <!-- Your custom JS scripts -->
+    <script>
+      // Add event listener for the sidebar toggle button
+      document
+        .querySelector(".mdc-icon-button")
+        .addEventListener("click", function () {
+          document
+            .querySelector(".mdc-drawer")
+            .classList.toggle("mdc-drawer--open");
+          document
+            .querySelector(".mdc-drawer-app-content")
+            .classList.toggle("mdc-drawer--open");
+        });
+    </script>
+  </body>
+</html>

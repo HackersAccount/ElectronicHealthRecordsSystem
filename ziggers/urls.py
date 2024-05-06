@@ -14,9 +14,39 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
+from rest_framework import permissions
+from drf_yasg.views import get_schema_view
+from drf_yasg import openapi
+
+# Create schema view for OpenAPI documentation
+schema_view = get_schema_view(
+    openapi.Info(
+        title="Your API Title",
+        default_version="v1",
+        description="Your API Description",
+        terms_of_service="https://your-terms-of-service-url.com/",
+        contact=openapi.Contact(email="your-contact-email@example.com"),
+        license=openapi.License(name="Your License"),
+    ),
+    public=True,
+    permission_classes=(permissions.AllowAny,),
+)
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path("admin/", admin.site.urls),
+    path("api/v1/", include("medical_history.urls")),
+    # OpenAPI documentation URLs
+    path(
+        "api/v1/docs/",
+        schema_view.with_ui("swagger", cache_timeout=0),
+        name="schema-swagger-ui",
+    ),
+    path(
+        "api/v1/docs/swagger.json",
+        schema_view.without_ui(cache_timeout=0),
+        name="schema-json",
+    ),
 ]
