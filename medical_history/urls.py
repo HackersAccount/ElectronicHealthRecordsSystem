@@ -13,9 +13,9 @@ api_urls = router.urls
 
 urlpatterns = [
     path("dashboard/", views.index, name="index"),
-    path("patients/", views.index, name="patients_page"),
-    path("medications/", views.index, name="medication_page"),
-    path("diagnoses/", views.index, name="diagnosis_page"),
+    path("patients/", views.patients_page, name="patients_page"),
+    path("medications/", views.medications_page, name="medication_page"),
+    path("diagnoses/", views.diagnoses_page, name="diagnosis_page"),
 ]
 
 urlpatterns += api_urls

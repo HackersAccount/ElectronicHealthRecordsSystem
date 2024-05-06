@@ -15,8 +15,63 @@
     />
     <!-- Your custom CSS styles -->
     <style>
+      /* Styling for the sidebar */
+      .mdc-drawer {
+        width: 240px; /* Set the width of the sidebar */
+        background-color: #1976d2; /* Sidebar background color */
+        color: white; /* Text color */
+        transition: width 0.3s ease;
+        z-index: 999; /* Ensure sidebar is above other content */
+      }
+
+      .mdc-drawer__content {
+        padding-top: 16px; /* Add some padding at the top */
+      }
+
+      .mdc-list-item {
+        color: white; /* Text color for list items */
+      }
+
+      .mdc-list-item:hover {
+        background-color: rgba(255, 255, 255, 0.1); /* Hover effect */
+      }
+
       .mdc-top-app-bar--fixed-adjust {
-        margin-left: 24px; /* Set the width of the sidebar */
+        margin-left: 24px; /* Adjust margin to account for the width of the sidebar */
+        transition: margin-left 0.3s ease;
+      }
+
+      /* Styling for the sidebar toggle button */
+      .mdc-icon-button {
+        color: white; /* Button color */
+      }
+
+      /* Styling for the main content */
+      .mdc-drawer-app-content {
+        transition: margin-left 0.3s ease;
+      }
+
+      /* Media query for smaller screens */
+      @media (max-width: 600px) {
+        .mdc-drawer {
+          width: 100%; /* Make sidebar full width on smaller screens */
+          position: fixed; /* Fix sidebar position on smaller screens */
+          top: 0;
+          left: -100%; /* Hide sidebar by default on smaller screens */
+          height: 100%;
+        }
+
+        .mdc-drawer--open {
+          left: 0; /* Show sidebar when opened */
+        }
+
+        .mdc-top-app-bar--fixed-adjust {
+          margin-left: 0; /* Adjust main content margin when sidebar is open */
+        }
+
+        .mdc-drawer-app-content.mdc-drawer--open {
+          margin-left: 100%; /* Adjust main content margin when sidebar is open */
+        }
       }
     </style>
   </head>
@@ -72,7 +127,44 @@
     <!-- Material-UI JS -->
     <script src="https://cdn.jsdelivr.net/npm/material-components-web@11.0.0/dist/material-components-web.min.js"></script>
     <!-- Your custom JS scripts -->
+    <!-- Material-UI JS -->
+    <script src="https://cdn.jsdelivr.net/npm/material-components-web@11.0.0/dist/material-components-web.min.js"></script>
+    <!-- Your custom JS scripts -->
     <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Retrieve the sidebar state from local storage
+        const isSidebarOpen = localStorage.getItem("sidebarOpen") === "true";
+
+        // Function to toggle the sidebar state
+        function toggleSidebar() {
+          const sidebar = document.querySelector(".mdc-drawer");
+          const appContent = document.querySelector(".mdc-drawer-app-content");
+          const isOpen = sidebar.classList.contains("mdc-drawer--open");
+
+          if (isOpen) {
+            sidebar.classList.remove("mdc-drawer--open");
+            appContent.classList.remove("mdc-drawer--open");
+            localStorage.setItem("sidebarOpen", "false"); // Update local storage
+          } else {
+            sidebar.classList.add("mdc-drawer--open");
+            appContent.classList.add("mdc-drawer--open");
+            localStorage.setItem("sidebarOpen", "true"); // Update local storage
+          }
+        }
+
+        // Add event listener for the sidebar toggle button
+        document
+          .querySelector(".mdc-icon-button")
+          .addEventListener("click", toggleSidebar);
+
+        // Set the initial sidebar state based on local storage
+        if (isSidebarOpen) {
+          toggleSidebar();
+        }
+      });
+    </script>
+
+    <!-- <script>
       // Add event listener for the sidebar toggle button
       document
         .querySelector(".mdc-icon-button")
@@ -84,6 +176,6 @@
             .querySelector(".mdc-drawer-app-content")
             .classList.toggle("mdc-drawer--open");
         });
-    </script>
+    </script> -->
   </body>
 </html>
